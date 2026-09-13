@@ -1,19 +1,44 @@
-/**
- * Landing-page FAQ accordion.
- */
-(function () {
-  'use strict';
+document.addEventListener("DOMContentLoaded", () => {
+    const faqItems = document.querySelectorAll(".faq-item");
 
-  document.querySelectorAll('.faq-button').forEach(button => {
-    button.addEventListener('click', () => {
-      const item = button.closest('.faq-item');
-      if (!item) return;
+    if (!faqItems.length) {
+        return;
+    }
 
-      document.querySelectorAll('.faq-item').forEach(other => {
-        if (other !== item) other.classList.remove('open');
-      });
+    faqItems.forEach((item) => {
+        const button = item.querySelector(".faq-button");
 
-      item.classList.toggle('open');
+        if (!button) {
+            return;
+        }
+
+        button.setAttribute("aria-expanded", "false");
+
+        button.addEventListener("click", () => {
+            const wasOpen = item.classList.contains("open");
+
+            faqItems.forEach((faqItem) => {
+                faqItem.classList.remove("open");
+
+                const faqButton =
+                    faqItem.querySelector(".faq-button");
+
+                if (faqButton) {
+                    faqButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+                }
+            });
+
+            if (!wasOpen) {
+                item.classList.add("open");
+
+                button.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+            }
+        });
     });
-  });
-})();
+});

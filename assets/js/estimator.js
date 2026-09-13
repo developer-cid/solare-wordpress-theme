@@ -91,7 +91,7 @@
     });
 
     let customItems = [];
-    let usagePattern = 'balance';
+    let usagePattern = 'balanced';
     let lastCalculation = null;
 
     const peso = value =>
@@ -533,7 +533,7 @@
       document.getElementById('patternNote').textContent =
         usagePattern === 'day'
           ? 'Mostly daytime usage'
-          : usagePattern === 'night'
+          : usagePattern === 'evening'
             ? 'Mostly evening usage'
             : 'Balanced day-and-evening usage';
 
@@ -881,32 +881,6 @@
     // Recalculate displayed price/ROI if the location changes.
     document.getElementById('locationSelect').addEventListener('change', () => {
       if (lastCalculation) calculate();
-    });
-
-    // Same mobile menu behavior as landing page.
-    const menuButton = document.getElementById('menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const openIcon = document.getElementById('menu-open-icon');
-    const closeIcon = document.getElementById('menu-close-icon');
-
-    function toggleMenu() {
-      const isOpen = !mobileMenu.classList.contains('hidden');
-
-      mobileMenu.classList.toggle('hidden', isOpen);
-      openIcon.classList.toggle('hidden', !isOpen);
-      closeIcon.classList.toggle('hidden', isOpen);
-      menuButton.setAttribute('aria-expanded', String(!isOpen));
-    }
-
-    menuButton.addEventListener('click', toggleMenu);
-
-    document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        openIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-        menuButton.setAttribute('aria-expanded', 'false');
-      });
     });
 
     // Same subtle reveal pattern used on the landing page.

@@ -98,7 +98,7 @@
             ${Number(item.watts).toLocaleString()}W × ${item.qty} · ${item.hours}h/day
           </p>
         </div>
-        <button type="button" data-custom-remove="${escapeHTML(item.id)}"
+        <button type="button" data-remove="${escapeHTML(item.id)}"
           class="shrink-0 rounded-lg border border-slate-200 px-3 py-2 text-xs font-bold text-slate-500 hover:bg-red-50 hover:text-red-600">
           Remove
         </button>
