@@ -300,100 +300,112 @@ $theme_uri = get_template_directory_uri();
     <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
       <div>
         <p class="text-sm font-bold uppercase tracking-[.18em] text-solar-600">Projects & Insights</p>
-        <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Ideas, installations, and a cleaner future.</h2>
+        <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">Ideas, installations, and a cleaner future.</h2>
       </div>
       <a href="#contact" class="text-sm font-bold text-slate-700 hover:text-solar-600">Talk to a solar specialist →</a>
     </div>
 
     <?php
-$projects_query = new WP_Query([
-    'post_type'      => 'solare_project',
-    'post_status'    => 'publish',
-    'posts_per_page' => 3,
-    'orderby'        => 'date',
-    'order'          => 'DESC',
-]);
-?>
+    $insights_query = new WP_Query([
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        'posts_per_page' => 2,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ]);
+    ?>
 
-<div class="mt-14 grid gap-6 lg:grid-cols-3">
+    <div class="mt-14 grid gap-6 lg:grid-cols-3">
+      <?php if ($insights_query->have_posts()) : ?>
+        <?php while ($insights_query->have_posts()) : ?>
+          <?php $insights_query->the_post(); ?>
 
-    <?php if ($projects_query->have_posts()) : ?>
+          <article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <a href="<?php the_permalink(); ?>" class="block">
+              <?php if (has_post_thumbnail()) : ?>
+                <?php
+                the_post_thumbnail(
+                    'large',
+                    [
+                        'class' => 'h-56 w-full object-cover',
+                        'alt'   => esc_attr(get_the_title()),
+                    ]
+                );
+                ?>
+              <?php endif; ?>
+            </a>
 
-        <?php while ($projects_query->have_posts()) : ?>
-            <?php $projects_query->the_post(); ?>
+            <div class="p-6">
+              <?php
+              $categories    = get_the_category();
+              $category_name = !empty($categories)
+                  ? $categories[0]->name
+                  : 'Insights';
+              ?>
 
-            <article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <p class="text-[10px] font-bold uppercase tracking-wider text-solar-600">
+                <?php echo esc_html($category_name); ?>
+              </p>
 
-                <?php if (has_post_thumbnail()) : ?>
-                    <?php
-                    the_post_thumbnail(
-                        'large',
-                        [
-                            'class' => 'h-56 w-full object-cover',
-                            'alt'   => esc_attr(get_the_title()),
-                        ]
-                    );
-                    ?>
-                <?php endif; ?>
+              <h3 class="mt-4 text-lg font-bold leading-7 text-slate-950">
+                <a href="<?php the_permalink(); ?>" class="transition hover:text-solar-600">
+                  <?php the_title(); ?>
+                </a>
+              </h3>
 
-                <div class="p-6">
-                  <?php
-                  $project_location = get_field('project_location');
-                  $system_size      = get_field('system_size');
-                  $system_type      = get_field('system_type');
-                  ?>
+              <div class="mt-3 text-sm leading-6 text-slate-500">
+                <?php
+                echo esc_html(
+                    wp_trim_words(
+                        get_the_excerpt() ?: get_the_content(),
+                        22
+                    )
+                );
+                ?>
+              </div>
 
-                    <div class="flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-solar-600">
-
-                        <?php if ($system_type) : ?>
-                            <span><?php echo esc_html($system_type); ?></span>
-                        <?php endif; ?>
-
-                        <?php if ($system_type && $system_size) : ?>
-                            <span>•</span>
-                        <?php endif; ?>
-
-                        <?php if ($system_size) : ?>
-                            <span><?php echo esc_html($system_size); ?> kW</span>
-                        <?php endif; ?>
-
-                    </div>
-
-                    <h3 class="mt-3 text-lg font-bold">
-                        <a
-                            href="<?php the_permalink(); ?>"
-                            class="transition hover:text-solar-600"
-                        >
-                            <?php the_title(); ?>
-                        </a>
-                    </h3>
-
-                    <?php if ($project_location) : ?>
-                        <p class="mt-2 text-xs font-semibold text-slate-400">
-                            📍 <?php echo esc_html($project_location); ?>
-                        </p>
-                    <?php endif; ?>
-
-                    <div class="mt-2 text-sm leading-6 text-slate-500">
-                        <?php echo wp_kses_post(wp_trim_words(get_the_content(), 24)); ?>
-                    </div>
-                </div>
-
-            </article>
-
+              <p class="mt-5 text-xs font-semibold text-slate-400">
+                <?php echo esc_html(get_the_date('F j, Y')); ?>
+              </p>
+            </div>
+          </article>
         <?php endwhile; ?>
 
         <?php wp_reset_postdata(); ?>
+      <?php else : ?>
+        <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-6 lg:col-span-2">
+          <p class="text-sm font-semibold text-slate-700">No blog posts available yet.</p>
+          <p class="mt-2 text-sm text-slate-500">Add posts from WordPress Admin → Posts.</p>
+        </div>
+      <?php endif; ?>
 
-    <?php else : ?>
+      <article class="flex min-h-[480px] flex-col justify-between rounded-2xl bg-slate-950 p-7 text-white shadow-sm">
+        <div>
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-solar-400 text-slate-950">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+            </svg>
+          </div>
 
-        <p class="text-sm text-slate-500">
-            No projects available yet.
-        </p>
+          <p class="mt-8 text-xs font-bold uppercase tracking-wider text-solar-400">Your Property</p>
 
-    <?php endif; ?>
+          <h3 class="mt-4 max-w-sm text-2xl font-extrabold leading-tight">
+            See what solar could look like for you.
+          </h3>
 
-</div>
+          <p class="mt-4 max-w-sm text-sm leading-6 text-slate-300">
+            Request a free assessment and get a proposal tailored to your energy consumption.
+          </p>
+        </div>
+
+        <div class="mt-8">
+          <a href="#contact" class="inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-slate-100">
+            Request Assessment
+          </a>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 

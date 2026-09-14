@@ -239,3 +239,151 @@ body {
 }
 
 
+/* =========================================================
+   Blog Article Content
+   ========================================================= */
+
+.solare-article-content {
+    color: #475569;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.solare-article-content > *:first-child {
+    margin-top: 0;
+}
+
+.solare-article-content p {
+    margin: 0 0 1.5rem;
+}
+
+.solare-article-content h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: #0f172a;
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+}
+
+.solare-article-content h3 {
+    margin-top: 2.25rem;
+    margin-bottom: 0.85rem;
+    color: #0f172a;
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.solare-article-content h4 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: #0f172a;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.solare-article-content strong {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.solare-article-content a {
+    color: #ca8a04;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.solare-article-content a:hover {
+    color: #a16207;
+}
+
+.solare-article-content ul,
+.solare-article-content ol {
+    margin: 1.25rem 0 1.75rem;
+    padding-left: 1.5rem;
+}
+
+.solare-article-content ul {
+    list-style-type: disc;
+}
+
+.solare-article-content ol {
+    list-style-type: decimal;
+}
+
+.solare-article-content li {
+    margin-bottom: 0.65rem;
+}
+
+.solare-article-content blockquote {
+    margin: 2rem 0;
+    border-left: 4px solid #facc15;
+    background: #f8fafc;
+    padding: 1.25rem 1.5rem;
+    color: #334155;
+}
+
+.solare-article-content img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 2.5rem 0;
+    border-radius: 1rem;
+}
+
+.solare-article-content figure {
+    margin: 2.5rem 0;
+}
+
+.solare-article-content figcaption {
+    margin-top: 0.75rem;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.solare-article-content hr {
+    margin: 3rem 0;
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+}
+
+.solare-article-content table {
+    width: 100%;
+    margin: 2rem 0;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.solare-article-content th,
+.solare-article-content td {
+    border: 1px solid #e2e8f0;
+    padding: 0.85rem 1rem;
+    text-align: left;
+}
+
+.solare-article-content th {
+    background: #f8fafc;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+@media (max-width: 640px) {
+    .solare-article-content {
+        font-size: 0.95rem;
+        line-height: 1.75;
+    }
+
+    .solare-article-content h2 {
+        margin-top: 2.5rem;
+        font-size: 1.5rem;
+    }
+
+    .solare-article-content h3 {
+        font-size: 1.2rem;
+    }
+}
