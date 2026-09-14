@@ -238,6 +238,13 @@ $theme_uri = get_template_directory_uri();
         <span class="rounded-full border border-white/10 px-3 py-1.5 text-xs font-semibold text-slate-300">Innovation</span>
         <span class="rounded-full border border-white/10 px-3 py-1.5 text-xs font-semibold text-slate-300">Sustainability</span>
       </div>
+
+      <a
+        href="<?php echo esc_url(home_url('/about-us/')); ?>"
+        class="mt-8 inline-flex items-center gap-2 text-sm font-bold text-solar-300 transition hover:text-solar-200"
+      >
+        Learn More About Us <span aria-hidden="true">→</span>
+      </a>
     </div>
   </div>
 </section>

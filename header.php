@@ -1,8 +1,22 @@
-<!doctype html>
+<?php
+/**
+ * Theme Header
+ *
+ * @package Solare
+ */
+
+$theme_uri = get_template_directory_uri();
+
+$is_projects_page = is_page('projects') || is_singular('solare_project');
+$is_solar_planner = is_page('solar-planner');
+?>
+
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1"
@@ -11,199 +25,286 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class('bg-white text-slate-900 antialiased'); ?>>
+<body <?php body_class('bg-white text-slate-950 antialiased'); ?>>
 
 <?php wp_body_open(); ?>
 
 <header
     id="site-header"
-    class="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur-xl"
+    class="fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-md"
 >
-    <div
-        class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:h-24 sm:px-6 lg:h-28 lg:px-8"
-    >
-        <a
-            href="<?php echo esc_url(home_url('/')); ?>"
-            class="flex items-center"
-            aria-label="SOL.ARE SOLUTIONS home"
-        >
-            <img
-                src="<?php echo esc_url(
-                    get_template_directory_uri() .
-                    '/assets/images/solare-logo.webp'
-                ); ?>"
-                alt="SOL.ARE SOLUTIONS — Take Charge of Your Energy"
-                class="h-14 w-auto max-w-[230px] object-contain sm:h-20 sm:max-w-[340px] lg:h-24 lg:max-w-[390px]"
-            >
-        </a>
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
 
-        <nav class="hidden items-center gap-8 lg:flex" aria-label="Primary navigation">
+        <div class="flex h-24 items-center justify-between lg:h-28">
+
+            <!-- =====================================================
+                 Logo
+                 ===================================================== -->
 
             <a
-                href="<?php echo esc_url(home_url('/#services')); ?>"
-                class="relative text-sm font-semibold text-slate-600 transition hover:text-slate-950"
+                href="<?php echo esc_url(home_url('/')); ?>"
+                class="flex shrink-0 items-center"
+                aria-label="SOL.ARE Solutions Home"
             >
-                Services
+                <img
+                    src="<?php echo esc_url($theme_uri . '/assets/images/solare-logo.webp'); ?>"
+                    alt="SOL.ARE Solutions"
+                    class="h-14 w-auto sm:h-16 lg:h-[72px]"
+                >
             </a>
 
-            <a
-                href="<?php echo esc_url(home_url('/#about')); ?>"
-                class="relative text-sm font-semibold text-slate-600 transition hover:text-slate-950"
+
+            <!-- =====================================================
+                 Desktop Navigation
+                 ===================================================== -->
+
+            <nav
+                class="hidden items-center gap-7 lg:flex"
+                aria-label="Primary Navigation"
             >
-                About
-            </a>
 
-            <a
-                href="<?php echo esc_url(home_url('/#process')); ?>"
-                class="relative text-sm font-semibold text-slate-600 transition hover:text-slate-950"
+                <!-- Services -->
+                <a
+                    href="<?php echo esc_url(home_url('/#services')); ?>"
+                    data-section-link="services"
+                    class="relative text-sm font-semibold text-slate-600 transition hover:text-slate-950"
+                >
+                    Services
+                </a>
+
+
+                <!-- About -->
+                <a
+                    href="<?php echo esc_url(home_url('/#about')); ?>"
+                    data-section-link="about"
+                    class="relative text-sm font-semibold text-slate-600 transition hover:text-slate-950"
+                >
+                    About
+                </a>
+
+
+                <!-- How It Works -->
+                <a
+                    href="<?php echo esc_url(home_url('/#process')); ?>"
+                    data-section-link="process"
+                    class="relative text-sm font-semibold text-slate-600 transition hover:text-slate-950"
+                >
+                    How It Works
+                </a>
+
+
+                <!-- Projects -->
+                <a
+                    href="<?php echo esc_url(home_url('/projects/')); ?>"
+                    class="<?php echo esc_attr(
+                        $is_projects_page
+                            ? 'relative text-sm font-bold text-slate-950 after:absolute after:-bottom-2 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-solar-400'
+                            : 'relative text-sm font-semibold text-slate-600 transition hover:text-slate-950'
+                    ); ?>"
+                >
+                    Projects
+                </a>
+
+
+                <!-- Solar Planner -->
+                <a
+                    href="<?php echo esc_url(home_url('/solar-planner/')); ?>"
+                    class="<?php echo esc_attr(
+                        $is_solar_planner
+                            ? 'relative text-sm font-bold text-slate-950 after:absolute after:-bottom-2 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-solar-400'
+                            : 'relative text-sm font-semibold text-slate-600 transition hover:text-slate-950'
+                    ); ?>"
+                >
+                    Solar Planner
+                </a>
+
+
+                <!-- FAQ -->
+                <a
+                    href="<?php echo esc_url(home_url('/#faq')); ?>"
+                    data-section-link="faq"
+                    class="relative text-sm font-semibold text-slate-600 transition hover:text-slate-950"
+                >
+                    FAQ
+                </a>
+
+            </nav>
+
+
+            <!-- =====================================================
+                 Desktop Actions
+                 ===================================================== -->
+
+            <div class="hidden items-center gap-5 lg:flex">
+
+                <a
+                    href="tel:+639171797201"
+                    class="text-sm font-bold text-slate-700 transition hover:text-solar-600"
+                >
+                    0917 179 7201
+                </a>
+
+                <a
+                    href="<?php echo esc_url(home_url('/#contact')); ?>"
+                    class="inline-flex items-center justify-center rounded-xl bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-slate-800"
+                >
+                    Get Free Quote
+                </a>
+
+            </div>
+
+
+            <!-- =====================================================
+                 Mobile Menu Button
+                 ===================================================== -->
+
+            <button
+                id="menu-button"
+                type="button"
+                class="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-950 transition hover:bg-slate-50 lg:hidden"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+                aria-label="Open navigation menu"
             >
-                How It Works
-            </a>
 
-            <a
-                href="<?php echo esc_url(home_url('/#projects')); ?>"
-                class="relative text-sm font-semibold text-slate-600 transition hover:text-slate-950"
-            >
-                Projects
-            </a>
+                <!-- Open Icon -->
+                <svg
+                    id="menu-open-icon"
+                    class="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path
+                        d="M4 7h16M4 12h16M4 17h16"
+                        stroke-linecap="round"
+                    />
+                </svg>
 
-            <a
-                href="<?php echo esc_url(home_url('/solar-planner/')); ?>"
-                class="<?php echo is_page('solar-planner')
-                    ? 'relative text-sm font-bold text-slate-950'
-                    : 'relative text-sm font-semibold text-slate-600 transition hover:text-slate-950'; ?>"
-            >
-                Solar Planner
 
-                <?php if (is_page('solar-planner')) : ?>
-                    <span
-                        class="absolute inset-x-0 -bottom-3 mx-auto h-0.5 w-8 rounded-full bg-solar-400"
-                        aria-hidden="true"
-                    ></span>
-                <?php endif; ?>
-            </a>
+                <!-- Close Icon -->
+                <svg
+                    id="menu-close-icon"
+                    class="hidden h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path
+                        d="M6 6l12 12M18 6L6 18"
+                        stroke-linecap="round"
+                    />
+                </svg>
 
-            <a
-                href="<?php echo esc_url(home_url('/#faq')); ?>"
-                class="relative text-sm font-semibold text-slate-600 transition hover:text-slate-950"
-            >
-                FAQ
-            </a>
+            </button>
 
-        </nav>
-
-        <div class="hidden items-center gap-3 md:flex">
-            <a
-                href="tel:+639171797201"
-                class="rounded-xl px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:bg-slate-100"
-            >
-                0917 179 7201
-            </a>
-
-            <a
-                href="<?php echo esc_url(home_url('/#contact')); ?>"
-                class="rounded-xl bg-slate-950 px-5 py-2.5 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-slate-800"
-            >
-                Get Free Quote
-            </a>
         </div>
 
-        <button
-            id="menu-button"
-            type="button"
-            class="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-700 md:hidden"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
-            aria-label="Open menu"
+
+        <!-- =========================================================
+             Mobile Navigation
+             ========================================================= -->
+
+        <div
+            id="mobile-menu"
+            class="hidden border-t border-slate-100 pb-6 pt-4 lg:hidden"
         >
-            <svg
-                id="menu-open-icon"
-                class="h-6 w-6"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-            >
-                <path
-                    d="M4 6h16M4 12h16M4 18h16"
-                    stroke-linecap="round"
-                />
-            </svg>
 
-            <svg
-                id="menu-close-icon"
-                class="hidden h-6 w-6"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
+            <nav
+                class="space-y-1"
+                aria-label="Mobile Navigation"
             >
-                <path
-                    d="m6 6 12 12M18 6 6 18"
-                    stroke-linecap="round"
-                />
-            </svg>
-        </button>
-    </div>
 
-    <div
-        id="mobile-menu"
-        class="hidden border-t border-slate-200 bg-white md:hidden"
-    >
-        <nav
-            class="mx-auto max-w-7xl space-y-1 px-6 py-5"
-            aria-label="Mobile navigation"
-        >
-            <a
-                href="<?php echo esc_url(home_url('/#services')); ?>"
-                class="mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-                Services
-            </a>
+                <!-- Services -->
+                <a
+                    href="<?php echo esc_url(home_url('/#services')); ?>"
+                    data-section-link="services"
+                    class="mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                    Services
+                </a>
 
-            <a
-                href="<?php echo esc_url(home_url('/#about')); ?>"
-                class="mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-                About
-            </a>
 
-            <a
-                href="<?php echo esc_url(home_url('/#process')); ?>"
-                class="mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-                How It Works
-            </a>
+                <!-- About -->
+                <a
+                    href="<?php echo esc_url(home_url('/#about')); ?>"
+                    data-section-link="about"
+                    class="mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                    About
+                </a>
 
-            <a
-                href="<?php echo esc_url(home_url('/#projects')); ?>"
-                class="mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-                Projects
-            </a>
 
-            <a
-                href="<?php echo esc_url(home_url('/solar-planner/')); ?>"
-                class="<?php echo is_page('solar-planner')
-                    ? 'mobile-link block rounded-xl bg-solar-50 px-4 py-3 text-sm font-bold text-solar-800'
-                    : 'mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50'; ?>"
-            >
-                Solar Planner
-            </a>
+                <!-- How It Works -->
+                <a
+                    href="<?php echo esc_url(home_url('/#process')); ?>"
+                    data-section-link="process"
+                    class="mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                    How It Works
+                </a>
 
-            <a
-                href="<?php echo esc_url(home_url('/#faq')); ?>"
-                class="mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-                FAQ
-            </a>
 
-            <a
-                href="<?php echo esc_url(home_url('/#contact')); ?>"
-                class="mobile-link mt-2 block rounded-xl bg-slate-950 px-4 py-3 text-center text-sm font-bold text-white"
-            >
-                Get Free Quote
-            </a>
-        </nav>
+                <!-- Projects -->
+                <a
+                    href="<?php echo esc_url(home_url('/projects/')); ?>"
+                    class="<?php echo esc_attr(
+                        $is_projects_page
+                            ? 'mobile-link block rounded-xl bg-solar-50 px-4 py-3 text-sm font-bold text-solar-800'
+                            : 'mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50'
+                    ); ?>"
+                >
+                    Projects
+                </a>
+
+
+                <!-- Solar Planner -->
+                <a
+                    href="<?php echo esc_url(home_url('/solar-planner/')); ?>"
+                    class="<?php echo esc_attr(
+                        $is_solar_planner
+                            ? 'mobile-link block rounded-xl bg-solar-50 px-4 py-3 text-sm font-bold text-solar-800'
+                            : 'mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50'
+                    ); ?>"
+                >
+                    Solar Planner
+                </a>
+
+
+                <!-- FAQ -->
+                <a
+                    href="<?php echo esc_url(home_url('/#faq')); ?>"
+                    data-section-link="faq"
+                    class="mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                    FAQ
+                </a>
+
+            </nav>
+
+
+            <!-- Mobile Contact -->
+            <div class="mt-5 border-t border-slate-100 pt-5">
+
+                <a
+                    href="tel:+639171797201"
+                    class="block rounded-xl px-4 py-3 text-sm font-bold text-slate-700"
+                >
+                    0917 179 7201
+                </a>
+
+                <a
+                    href="<?php echo esc_url(home_url('/#contact')); ?>"
+                    class="mt-2 flex items-center justify-center rounded-xl bg-slate-950 px-5 py-3.5 text-sm font-bold text-white"
+                >
+                    Get Free Quote
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
 </header>
