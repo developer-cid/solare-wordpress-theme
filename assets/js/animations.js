@@ -4,14 +4,22 @@
  * Homepage:
  * - Automatically animate page sections and service cards.
  *
+ * About Us:
+ * - Only animate elements explicitly marked with .reveal-on-scroll.
+ *
  * Solar Planner:
  * - Only animate elements explicitly marked with .reveal-on-scroll.
  * - Step 1 and Step 2 remain immediately visible.
+ *
+ * Other pages:
+ * - No reveal animations are automatically applied.
  */
 (function () {
   'use strict';
 
   const solarPlanner = document.getElementById('solar-planner');
+  const aboutPage = document.getElementById('about-page');
+  const homepage = document.body.classList.contains('home');
 
   let revealTargets = [];
 
@@ -19,21 +27,27 @@
     /**
      * Solar Planner
      *
-     * Do NOT automatically add reveal animations to every <section>.
-     * The estimator contains large nested sections, and hiding the
-     * whole estimator wrapper would also hide all of its children.
-     *
-     * Only elements explicitly carrying .reveal-on-scroll are animated.
+     * Only explicitly marked elements are animated.
      */
     revealTargets = [
       ...solarPlanner.querySelectorAll('.reveal-on-scroll')
     ];
-  } else {
+  } else if (aboutPage) {
     /**
-     * Landing page
+     * About Us
      *
-     * Preserve the original behavior:
-     * animate sections after the hero and service cards.
+     * Only explicitly marked elements are animated.
+     * This prevents the entire About page or its sections
+     * from being hidden automatically.
+     */
+    revealTargets = [
+      ...aboutPage.querySelectorAll('.reveal-on-scroll')
+    ];
+  } else if (homepage) {
+    /**
+     * Homepage
+     *
+     * Preserve the existing homepage behavior.
      */
     revealTargets = [
       ...document.querySelectorAll('main section:not(:first-child)'),

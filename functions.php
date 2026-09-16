@@ -33,6 +33,7 @@ add_action('after_setup_theme', 'solare_theme_setup');
 function solare_enqueue_assets()
 {
     $theme_uri = get_template_directory_uri();
+    $theme_dir = get_template_directory();
     $version   = wp_get_theme()->get('Version');
 
 
@@ -116,12 +117,14 @@ JS;
 
     /*
      * Shared mobile menu.
+     *
+     * Used across the website.
      */
     wp_enqueue_script(
         'solare-menu',
         $theme_uri . '/assets/js/menu.js',
         [],
-        filemtime(get_template_directory() . '/assets/js/menu.js'),
+        filemtime($theme_dir . '/assets/js/menu.js'),
         true
     );
 
@@ -135,7 +138,7 @@ JS;
             'solare-faq',
             $theme_uri . '/assets/js/faq.js',
             [],
-            $version,
+            filemtime($theme_dir . '/assets/js/faq.js'),
             true
         );
 
@@ -143,15 +146,40 @@ JS;
             'solare-assets',
             $theme_uri . '/assets/js/assets.js',
             [],
-            $version,
+            filemtime($theme_dir . '/assets/js/assets.js'),
             true
         );
+    }
+
+
+    /*
+     * Reveal animations.
+     *
+     * Homepage:
+     * - Automatically animates homepage sections and service cards.
+     *
+     * About Us:
+     * - Only animates elements explicitly marked with
+     *   .reveal-on-scroll.
+     *
+     * Solar Planner:
+     * - Only animates elements explicitly marked with
+     *   .reveal-on-scroll.
+     *
+     * Other pages:
+     * - animations.js is not loaded.
+     */
+    if (
+        is_front_page() ||
+        is_page('about-us') ||
+        is_page('solar-planner')
+    ) {
 
         wp_enqueue_script(
             'solare-animations',
             $theme_uri . '/assets/js/animations.js',
             [],
-            $version,
+            filemtime($theme_dir . '/assets/js/animations.js'),
             true
         );
     }
@@ -166,7 +194,10 @@ JS;
             'solare-estimator-config',
             $theme_uri . '/assets/js/estimator-config.js',
             [],
-            $version,
+            filemtime(
+                $theme_dir .
+                '/assets/js/estimator-config.js'
+            ),
             true
         );
 
@@ -174,7 +205,10 @@ JS;
             'solare-estimator-templates',
             $theme_uri . '/assets/js/estimator-templates.js',
             ['solare-estimator-config'],
-            $version,
+            filemtime(
+                $theme_dir .
+                '/assets/js/estimator-templates.js'
+            ),
             true
         );
 
@@ -185,21 +219,17 @@ JS;
                 'solare-estimator-config',
                 'solare-estimator-templates',
             ],
-            $version,
-            true
-        );
-
-        wp_enqueue_script(
-            'solare-animations',
-            $theme_uri . '/assets/js/animations.js',
-            [],
-            $version,
+            filemtime(
+                $theme_dir .
+                '/assets/js/estimator.js'
+            ),
             true
         );
     }
 }
 
 add_action('wp_enqueue_scripts', 'solare_enqueue_assets');
+
 
 /**
  * Register Projects custom post type.
@@ -221,22 +251,90 @@ function solare_register_project_post_type()
     ];
 
     $args = [
-        'labels'             => $labels,
-        'public'             => true,
-        'show_in_rest'       => true,
-        'menu_icon'          => 'dashicons-hammer',
-        'supports'           => [
+        'labels'       => $labels,
+        'public'       => true,
+        'show_in_rest' => true,
+        'menu_icon'    => 'dashicons-hammer',
+
+        'supports' => [
             'title',
             'editor',
             'thumbnail',
         ],
-        'has_archive'        => false,
-        'rewrite'            => [
+
+        'has_archive' => false,
+
+        'rewrite' => [
             'slug' => 'project',
         ],
     ];
 
-    register_post_type('solare_project', $args);
+    register_post_type(
+        'solare_project',
+        $args
+    );
 }
 
-add_action('init', 'solare_register_project_post_type');
+add_action(
+    'init',
+    'solare_register_project_post_type'
+);
+
+
+/**
+ * Register FAQ custom post type.
+ */
+function solare_register_faq_post_type()
+{
+    $labels = [
+        'name'               => 'FAQs',
+        'singular_name'      => 'FAQ',
+        'menu_name'          => 'FAQs',
+        'add_new'            => 'Add New',
+        'add_new_item'       => 'Add New FAQ',
+        'edit_item'          => 'Edit FAQ',
+        'new_item'           => 'New FAQ',
+        'view_item'          => 'View FAQ',
+        'search_items'       => 'Search FAQs',
+        'not_found'          => 'No FAQs found',
+        'not_found_in_trash' => 'No FAQs found in Trash',
+    ];
+
+    $args = [
+        'labels' => $labels,
+
+        /*
+         * FAQs are managed through the WordPress CMS
+         * but do not have their own public frontend page.
+         */
+        'public'       => false,
+        'show_ui'      => true,
+        'show_in_menu' => true,
+        'show_in_rest' => true,
+
+        'menu_icon' => 'dashicons-editor-help',
+
+        /*
+         * Title  = Question
+         * Editor = Answer
+         *
+         * page-attributes enables menu_order so FAQs
+         * can have a defined display order.
+         */
+        'supports' => [
+            'title',
+            'editor',
+            'page-attributes',
+        ],
+    ];
+
+    register_post_type(
+        'solare_faq',
+        $args
+    );
+}
+
+add_action(
+    'init',
+    'solare_register_faq_post_type'
+);
