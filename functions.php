@@ -338,3 +338,43 @@ add_action(
     'init',
     'solare_register_faq_post_type'
 );
+
+/**
+ * Register Testimonials custom post type.
+ * Title = Customer name; Editor = customer review.
+ */
+function solare_register_testimonial_post_type()
+{
+    $labels = [
+        'name' => 'Testimonials',
+        'singular_name' => 'Testimonial',
+        'menu_name' => 'Testimonials',
+        'add_new' => 'Add New',
+        'add_new_item' => 'Add New Testimonial',
+        'edit_item' => 'Edit Testimonial',
+        'new_item' => 'New Testimonial',
+        'view_item' => 'View Testimonial',
+        'search_items' => 'Search Testimonials',
+        'not_found' => 'No testimonials found',
+        'not_found_in_trash' => 'No testimonials found in Trash',
+    ];
+
+    $args = [
+        'labels' => $labels,
+        'public' => false,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_rest' => true,
+        'menu_icon' => 'dashicons-format-quote',
+        'supports' => [
+            'title',
+            'editor',
+            'page-attributes',
+        ],
+    ];
+
+    register_post_type('solare_testimonial', $args);
+}
+
+add_action('init', 'solare_register_testimonial_post_type');
+

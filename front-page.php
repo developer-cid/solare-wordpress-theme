@@ -23,6 +23,35 @@ function solare_home_field($field_name, $fallback = '')
 
     return $value;
 }
+
+/**
+ * Return an ACF image URL, with a theme image fallback.
+ */
+function solare_home_image($field_name, $fallback_path)
+{
+    $fallback = get_template_directory_uri() . $fallback_path;
+
+    if (!function_exists('get_field')) {
+        return $fallback;
+    }
+
+    $image = get_field($field_name);
+
+    if (is_array($image) && !empty($image['url'])) {
+        return $image['url'];
+    }
+
+    if (is_numeric($image)) {
+        $url = wp_get_attachment_image_url((int) $image, 'full');
+        return $url ?: $fallback;
+    }
+
+    if (is_string($image) && $image !== '') {
+        return $image;
+    }
+
+    return $fallback;
+}
 ?>
 
 
@@ -148,7 +177,7 @@ function solare_home_field($field_name, $fallback = '')
         <div class="absolute -inset-5 rounded-[2rem] bg-solar-400/20 blur-3xl"></div>
         <div class="relative overflow-hidden rounded-[2rem] border border-white bg-white shadow-soft">
           <img
-            src="<?php echo esc_url($theme_uri . '/assets/images/installation-roof.webp'); ?>"
+            src="<?php echo esc_url(solare_home_image('home_hero_image', '/assets/images/installation-roof.webp')); ?>"
             alt="Solar panels installed on a rooftop"
             class="h-[420px] w-full object-cover sm:h-[500px]"
           />
@@ -225,7 +254,7 @@ function solare_home_field($field_name, $fallback = '')
     <div class="mt-14 grid gap-6 lg:grid-cols-2">
       <article class="service-card group relative min-h-[390px] overflow-hidden rounded-3xl">
         <img class="service-image absolute inset-0 h-full w-full object-cover"
-          src="<?php echo esc_url($theme_uri . '/assets/images/about-us-photo.webp'); ?>"
+          src="<?php echo esc_url(solare_home_image('home_service_1_image', '/assets/images/about-us-photo.webp')); ?>"
           alt="Solar panels on a residential property" />
         <div class="image-overlay absolute inset-0"></div>
         <div class="absolute inset-x-0 bottom-0 p-7 sm:p-9">
@@ -240,7 +269,7 @@ function solare_home_field($field_name, $fallback = '')
 
       <article class="service-card group relative min-h-[390px] overflow-hidden rounded-3xl">
         <img class="service-image absolute inset-0 h-full w-full object-cover"
-          src="<?php echo esc_url($theme_uri . '/assets/images/installation-roof.webp'); ?>"
+          src="<?php echo esc_url(solare_home_image('home_service_2_image', '/assets/images/installation-roof.webp')); ?>"
           alt="Solar battery energy storage system" />
         <div class="image-overlay absolute inset-0"></div>
         <div class="absolute inset-x-0 bottom-0 p-7 sm:p-9">
@@ -285,7 +314,7 @@ function solare_home_field($field_name, $fallback = '')
     <div class="relative">
       <div class="absolute -inset-6 rounded-3xl bg-solar-400/10 blur-3xl"></div>
       <div class="relative overflow-hidden rounded-3xl border border-white/10">
-        <img src="<?php echo esc_url($theme_uri . '/assets/images/about-us-photo.webp'); ?>"
+        <img src="<?php echo esc_url(solare_home_image('home_about_image', '/assets/images/about-us-photo.webp')); ?>"
           alt="Solar installation on a modern home" class="h-[500px] w-full object-cover" />
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
         <div class="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-md">
@@ -404,8 +433,11 @@ function solare_home_field($field_name, $fallback = '')
         'post_type'      => 'post',
         'post_status'    => 'publish',
         'posts_per_page' => 2,
-        'orderby'        => 'date',
-        'order'          => 'DESC',
+        'post_name__in'  => [
+            'how-the-philippines-plans-to-transition-to-50-renewable-energy-by-2040',
+            'climate-change-and-energy-why-renewable-energy-is-a-necessity-not-a-luxury',
+        ],
+        'orderby'        => 'post_name__in',
     ]);
     ?>
 
@@ -508,26 +540,49 @@ function solare_home_field($field_name, $fallback = '')
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-sm font-bold uppercase tracking-[.18em] text-solar-400"><?php echo esc_html(solare_home_field('home_testimonials_label', 'Client Feedback')); ?></p>
       <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl"><?php echo esc_html(solare_home_field('home_testimonials_heading', 'Trusted by customers making the switch.')); ?></h2>
-      <p class="mt-5 text-slate-400"><?php echo esc_html(solare_home_field('home_testimonials_rating', 'Average rating: 4.9 out of 5 based on 150 reviews.')); ?></p>
     </div>
 
-    <div class="mt-14 grid gap-6 lg:grid-cols-3">
-      <blockquote class="rounded-2xl border border-white/10 bg-white/[.04] p-7">
-        <div class="text-solar-400">★★★★★</div>
-        <p class="mt-6 text-sm leading-7 text-slate-300">“<?php echo esc_html(solare_home_field('home_testimonial_1_quote', 'The installation process was smooth, and the team was very professional. I highly recommend SOL.ARE SOLUTIONS for anyone looking to invest in solar energy!')); ?>”</p>
-        <footer class="mt-7"><p class="text-sm font-bold"><?php echo esc_html(solare_home_field('home_testimonial_1_name', 'Carlos Reyes')); ?></p><p class="text-xs text-slate-500"><?php echo esc_html(solare_home_field('home_testimonial_1_role', 'Customer')); ?></p></footer>
-      </blockquote>
-      <blockquote class="rounded-2xl border border-white/10 bg-white/[.04] p-7">
-        <div class="text-solar-400">★★★★★</div>
-        <p class="mt-6 text-sm leading-7 text-slate-300">“<?php echo esc_html(solare_home_field('home_testimonial_2_quote', 'SOL.ARE SOLUTIONS transformed our energy consumption. The installation was quick, and the team was very supportive throughout the process.')); ?>”</p>
-        <footer class="mt-7"><p class="text-sm font-bold"><?php echo esc_html(solare_home_field('home_testimonial_2_name', 'Maria Santos')); ?></p><p class="text-xs text-slate-500"><?php echo esc_html(solare_home_field('home_testimonial_2_role', 'Customer')); ?></p></footer>
-      </blockquote>
-      <blockquote class="rounded-2xl border border-white/10 bg-white/[.04] p-7">
-        <div class="text-solar-400">★★★★★</div>
-        <p class="mt-6 text-sm leading-7 text-slate-300">“<?php echo esc_html(solare_home_field('home_testimonial_3_quote', 'Their team was professional, knowledgeable, and attentive to our needs. We are thrilled with the results and the savings on our energy bills!')); ?>”</p>
-        <footer class="mt-7"><p class="text-sm font-bold"><?php echo esc_html(solare_home_field('home_testimonial_3_name', 'John Doe')); ?></p><p class="text-xs text-slate-500"><?php echo esc_html(solare_home_field('home_testimonial_3_role', 'Customer')); ?></p></footer>
-      </blockquote>
-    </div>
+    <?php
+    $testimonials_query = new WP_Query([
+        'post_type'      => 'solare_testimonial',
+        'post_status'    => 'publish',
+        'posts_per_page' => 3,
+        'orderby'        => [
+            'menu_order' => 'ASC',
+            'date'       => 'DESC',
+        ],
+    ]);
+    ?>
+
+    <?php if ($testimonials_query->have_posts()) : ?>
+      <div class="mt-14 grid gap-6 lg:grid-cols-3">
+        <?php while ($testimonials_query->have_posts()) : ?>
+          <?php
+          $testimonials_query->the_post();
+          $rating = function_exists('get_field') ? (int) get_field('testimonial_rating') : 5;
+          if ($rating < 1 || $rating > 5) { $rating = 5; }
+          $customer_role = function_exists('get_field') ? trim((string) get_field('testimonial_customer_role')) : '';
+          if ($customer_role === '') { $customer_role = 'Customer'; }
+          $review = trim(wp_strip_all_tags(get_the_content()));
+          ?>
+          <blockquote class="rounded-2xl border border-white/10 bg-white/[.04] p-7">
+            <div class="text-solar-400" aria-label="<?php echo esc_attr($rating . ' out of 5 stars'); ?>">
+              <?php echo esc_html(str_repeat('★', $rating) . str_repeat('☆', 5 - $rating)); ?>
+            </div>
+            <p class="mt-6 text-sm leading-7 text-slate-300">“<?php echo esc_html($review); ?>”</p>
+            <footer class="mt-7">
+              <p class="text-sm font-bold"><?php echo esc_html(get_the_title()); ?></p>
+              <p class="text-xs text-slate-500"><?php echo esc_html($customer_role); ?></p>
+            </footer>
+          </blockquote>
+        <?php endwhile; ?>
+        <?php wp_reset_postdata(); ?>
+      </div>
+    <?php else : ?>
+      <div class="mx-auto mt-14 max-w-2xl rounded-2xl border border-white/10 bg-white/[.04] p-7 text-center">
+        <p class="text-sm text-slate-400">Customer testimonials will appear here once they are added and published in WordPress.</p>
+      </div>
+    <?php endif; ?>
   </div>
 </section>
 

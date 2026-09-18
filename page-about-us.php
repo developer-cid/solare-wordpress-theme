@@ -29,6 +29,35 @@ function solare_about_field($field_name, $fallback = '')
 
     return $value;
 }
+
+/**
+ * Return an ACF image URL, with a theme image fallback.
+ */
+function solare_about_image($field_name, $fallback_path)
+{
+    $fallback = get_template_directory_uri() . $fallback_path;
+
+    if (!function_exists('get_field')) {
+        return $fallback;
+    }
+
+    $image = get_field($field_name);
+
+    if (is_array($image) && !empty($image['url'])) {
+        return $image['url'];
+    }
+
+    if (is_numeric($image)) {
+        $url = wp_get_attachment_image_url((int) $image, 'full');
+        return $url ?: $fallback;
+    }
+
+    if (is_string($image) && $image !== '') {
+        return $image;
+    }
+
+    return $fallback;
+}
 ?>
 
 <main id="about-page" class="pt-32 lg:pt-40">
@@ -92,7 +121,7 @@ function solare_about_field($field_name, $fallback = '')
                     <div class="overflow-hidden rounded-3xl bg-slate-100 shadow-xl">
 
                         <img
-                            src="<?php echo esc_url($theme_uri . '/assets/images/about-us-photo.webp'); ?>"
+                            src="<?php echo esc_url(solare_about_image('about_hero_image', '/assets/images/about-us-photo.webp')); ?>"
                             alt="SOL.ARE Solutions solar installation team"
                             class="aspect-[4/3] w-full object-cover"
                         >
@@ -409,9 +438,7 @@ function solare_about_field($field_name, $fallback = '')
                 <div class="overflow-hidden bg-slate-100">
 
                     <img
-                        src="<?php echo esc_url(
-                            $theme_uri . '/assets/images/team/arman-cataga.webp'
-                        ); ?>"
+                        src="<?php echo esc_url(solare_about_image('about_arman_photo', '/assets/images/team/arman-cataga.webp')); ?>"
                         alt="Arman Joseph Cataga"
                         class="aspect-[4/4.5] w-full object-cover object-top transition duration-500 group-hover:scale-[1.02]"
                     >
@@ -445,9 +472,7 @@ function solare_about_field($field_name, $fallback = '')
                 <div class="overflow-hidden bg-slate-100">
 
                     <img
-                        src="<?php echo esc_url(
-                            $theme_uri . '/assets/images/team/rommel-lopena.webp'
-                        ); ?>"
+                        src="<?php echo esc_url(solare_about_image('about_rommel_photo', '/assets/images/team/rommel-lopena.webp')); ?>"
                         alt="Rommel Lopena"
                         class="aspect-[4/4.5] w-full object-cover object-top transition duration-500 group-hover:scale-[1.02]"
                     >
