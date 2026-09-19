@@ -499,6 +499,14 @@ function solare_about_image($field_name, $fallback_path)
     </div>
 </section>
 
+<!-- =========================================================
+     Contact / Free Solar Assessment
+     ========================================================= -->
+
+<div class="px-6 pt-20 lg:px-8 lg:pt-28">
+    <?php get_template_part('template-parts/contact-section'); ?>
+</div>
+
 </main>
 
 <?php

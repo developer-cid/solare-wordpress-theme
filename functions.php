@@ -378,3 +378,79 @@ function solare_register_testimonial_post_type()
 
 add_action('init', 'solare_register_testimonial_post_type');
 
+/**
+ * Validate contact information for the
+ * SOL.ARE Lead & Site Assessment Form.
+ *
+ * Form ID: 1036
+ * Email:    Field #2
+ * Phone:    Field #4
+ *
+ * Rules:
+ * - At least Email OR Phone Number is required.
+ * - Email format is handled by the WPForms Email field.
+ * - Philippine mobile numbers must be valid when provided.
+ */
+function solare_validate_lead_contact($fields, $entry, $form_data)
+{
+    if ((int) $form_data['id'] !== 1036) {
+        return;
+    }
+
+    $email = isset($fields[2]['value'])
+        ? trim($fields[2]['value'])
+        : '';
+
+    $phone = isset($fields[4]['value'])
+        ? trim($fields[4]['value'])
+        : '';
+
+    /*
+     * Require at least one contact method.
+     */
+    if ($email === '' && $phone === '') {
+        wpforms()->process->errors[1036][2] =
+            'Please provide either your email address or phone number.';
+
+        wpforms()->process->errors[1036][4] =
+            'Please provide either your email address or phone number.';
+
+        return;
+    }
+
+    /*
+     * Validate Philippine mobile number when provided.
+     *
+     * Accepted examples:
+     * 09171234567
+     * +639171234567
+     * 639171234567
+     *
+     * Spaces and hyphens are allowed.
+     */
+    if ($phone !== '') {
+
+        $normalized_phone = preg_replace(
+            '/[\s\-()]/',
+            '',
+            $phone
+        );
+
+        $valid_phone = preg_match(
+            '/^(?:\+63|63|0)9\d{9}$/',
+            $normalized_phone
+        );
+
+        if (!$valid_phone) {
+            wpforms()->process->errors[1036][4] =
+                'Please enter a valid Philippine mobile number, e.g. 09171234567.';
+        }
+    }
+}
+
+add_action(
+    'wpforms_process',
+    'solare_validate_lead_contact',
+    10,
+    3
+);

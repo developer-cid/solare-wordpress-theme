@@ -379,55 +379,9 @@ get_header();
       </div>
     </section>
 
-    <!-- Contact CTA using the same landing-page component pattern -->
-    <section class="px-6 pb-24 pt-6 lg:px-8 lg:pb-32" id="contact">
-      <div class="mx-auto max-w-7xl overflow-hidden rounded-3xl bg-solar-400 shadow-soft">
-        <div class="grid lg:grid-cols-[1.1fr_.9fr]">
-          <div class="p-8 sm:p-12 lg:p-16">
-            <p class="text-sm font-bold uppercase tracking-[0.18em] text-slate-900/60">Get a tailored solar assessment</p>
-            <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-              Ready for a recommendation tailored to your property?
-            </h2>
-            <p class="mt-5 max-w-xl leading-7 text-slate-800/75">
-              Use the planner as a starting point, then share your latest electricity bill and property details
-              with the SOL.ARE team for a more accurate system recommendation.
-            </p>
-
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href="tel:+639171797201" class="rounded-xl bg-slate-950 px-6 py-3.5 text-center text-sm font-bold text-white transition hover:bg-slate-800">
-                Call 0917 179 7201
-              </a>
-              <a href="mailto:hello@solaresolutions.ph" class="rounded-xl border border-slate-950/15 bg-white/60 px-6 py-3.5 text-center text-sm font-bold text-slate-950 transition hover:bg-white">
-                Email Us
-              </a>
-            </div>
-          </div>
-
-          <div class="bg-slate-950 p-8 text-white sm:p-12 lg:p-16">
-            <p class="text-xs font-bold uppercase tracking-wider text-solar-300">SOL.ARE SOLUTIONS</p>
-
-            <div class="mt-7 space-y-5">
-              <div>
-                <p class="text-xs text-slate-500">Mobile</p>
-                <a href="tel:+639171797201" class="mt-1 inline-block font-bold text-white">0917 179 7201</a>
-              </div>
-
-              <div>
-                <p class="text-xs text-slate-500">Email</p>
-                <a href="mailto:hello@solaresolutions.ph" class="mt-1 inline-block font-bold text-white">hello@solaresolutions.ph</a>
-              </div>
-
-              <div>
-                <p class="text-xs text-slate-500">Head Office</p>
-                <p class="mt-1 font-bold text-white">Las Piñas City, Metro Manila</p>
-              </div>
-            </div>
-
-            <a href="https://m.me/solarenewable" target="_blank" rel="noopener" class="mt-8 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950">Message the Team</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="px-6 pt-20 lg:px-8 lg:pt-28">
+        <?php get_template_part('template-parts/contact-section'); ?>
+    </div>
 </main>
 
 <?php get_footer(); ?>

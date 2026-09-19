@@ -662,39 +662,7 @@ $faq_query = new WP_Query([
   </div>
 </section>
 
-<section id="contact" class="scroll-mt-24 px-6 pb-24 lg:px-8 lg:pb-32">
-  <div class="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-solar-400 shadow-soft">
-    <div class="grid lg:grid-cols-[1.1fr_.9fr]">
-      <div class="p-8 sm:p-12 lg:p-16">
-        <p class="text-sm font-bold uppercase tracking-[.18em] text-slate-900/60"><?php echo esc_html(solare_home_field('home_contact_label', 'Get Started Today')); ?></p>
-        <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl"><?php echo esc_html(solare_home_field('home_contact_heading', 'Ready to take charge of your energy?')); ?></h2>
-        <p class="mt-5 max-w-xl leading-7 text-slate-800/75">
-          <?php echo esc_html(solare_home_field('home_contact_description', 'Tell us about your property and electricity needs. Our solar specialists can help you explore a system that fits your goals.')); ?>
-        </p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href="tel:+639171797201" class="rounded-xl bg-slate-950 px-6 py-3.5 text-center text-sm font-bold text-white hover:bg-slate-800"><?php echo esc_html(solare_home_field('home_contact_call_button', 'Call 0917 179 7201')); ?></a>
-          <a href="mailto:hello@solaresolutions.ph" class="rounded-xl border border-slate-950/15 bg-white/50 px-6 py-3.5 text-center text-sm font-bold text-slate-950 hover:bg-white"><?php echo esc_html(solare_home_field('home_contact_email_button', 'Email Us')); ?></a>
-        </div>
-      </div>
-
-      <div class="bg-slate-950 p-8 text-white sm:p-12 lg:p-16">
-        <p class="text-xs font-bold uppercase tracking-wider text-solar-300"><?php echo esc_html(solare_home_field('home_contact_office_label', 'Head Office')); ?></p>
-        <p class="mt-4 leading-7 text-slate-300">
-          <?php echo nl2br(esc_html(solare_home_field(
-              'home_contact_office_address',
-              "Alabang-Zapote Road,\nLas Piñas City, Metro Manila, Philippines 1740"
-          ))); ?>
-        </p>
-        <div class="mt-8 space-y-3 border-t border-white/10 pt-7 text-sm">
-          <!-- <p><span class="text-slate-500">Telephone:</span> (02) 1234 5678</p> -->
-          <p><span class="text-slate-500">Mobile:</span> <?php echo esc_html(solare_home_field('home_contact_mobile', '0917 179 7201')); ?></p>
-          <p><span class="text-slate-500">Email:</span> <?php echo esc_html(solare_home_field('home_contact_email', 'hello@solaresolutions.ph')); ?></p>
-        </div>
-        <a href="https://m.me/solarenewable" target="_blank" rel="noopener" class="mt-8 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950"><?php echo esc_html(solare_home_field('home_contact_messenger_button', 'Message the Team')); ?></a>
-      </div>
-    </div>
-  </div>
-</section>
+<?php get_template_part('template-parts/contact-section'); ?>
 
 </main>
 

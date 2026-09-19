@@ -156,7 +156,7 @@ $projects_query = new WP_Query([
                         </p>
 
                         <p class="mt-2 text-sm text-slate-500">
-                            Projects added in WordPress Admin will appear here automatically.
+                             We're preparing our latest solar installations for you to explore. Check back soon to see our completed projects.
                         </p>
 
                     </div>
@@ -167,6 +167,9 @@ $projects_query = new WP_Query([
 
         </div>
     </section>
+    <div class="px-6 pt-20 pb-16 lg:px-8 lg:pt-28 lg:pb-24">
+        <?php get_template_part('template-parts/contact-section'); ?>
+    </div>
 
 </main>
 

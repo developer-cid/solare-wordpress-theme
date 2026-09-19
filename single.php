@@ -89,31 +89,8 @@ while (have_posts()) :
                     <?php the_content(); ?>
                 </div>
 
-                <div class="mt-16 border-t border-slate-200 pt-10">
-
-                    <div class="rounded-3xl bg-slate-950 p-7 text-white sm:p-9">
-
-                        <p class="text-xs font-bold uppercase tracking-[.18em] text-solar-400">
-                            Ready to Go Solar?
-                        </p>
-
-                        <h2 class="mt-3 max-w-2xl text-2xl font-extrabold leading-tight sm:text-3xl">
-                            See what solar could look like for your property.
-                        </h2>
-
-                        <p class="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
-                            Request a free assessment and get a solar proposal based on your property and energy consumption.
-                        </p>
-
-                        <a
-                            href="<?php echo esc_url(home_url('/#contact')); ?>"
-                            class="mt-6 inline-flex rounded-xl bg-solar-400 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-solar-300"
-                        >
-                            Request Assessment
-                        </a>
-
-                    </div>
-
+                <div class="px-6 pt-20 pb-16 lg:px-8 lg:pt-28 lg:pb-24">
+                    <?php get_template_part('template-parts/contact-section'); ?>
                 </div>
 
             </div>
