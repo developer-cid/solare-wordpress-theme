@@ -464,3 +464,25 @@ add_action(
     10,
     3
 );
+
+/**
+ * Ensure the public Insights landing page exists.
+ *
+ * This lets the theme use /insights/ immediately after deployment while
+ * preserving any existing page with the same slug.
+ */
+function solare_ensure_insights_page()
+{
+    if (get_page_by_path('insights', OBJECT, 'page')) {
+        return;
+    }
+
+    wp_insert_post([
+        'post_title'  => 'Insights',
+        'post_name'   => 'insights',
+        'post_status' => 'publish',
+        'post_type'   => 'page',
+    ]);
+}
+
+add_action('init', 'solare_ensure_insights_page');

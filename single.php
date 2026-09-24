@@ -27,7 +27,7 @@ while (have_posts()) :
             <div class="mx-auto max-w-4xl px-6 lg:px-8">
 
                 <a
-                    href="<?php echo esc_url(home_url('/#projects')); ?>"
+                    href="<?php echo esc_url(home_url('/insights/')); ?>"
                     class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-solar-600"
                 >
                     ← Back to Insights

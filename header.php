@@ -9,6 +9,7 @@ $theme_uri = get_template_directory_uri();
 
 $is_projects_page = is_page('projects') || is_singular('solare_project');
 $is_solar_planner = is_page('solar-planner');
+$is_insights_page = is_page('insights') || is_singular('post');
 ?>
 
 <!DOCTYPE html>
@@ -93,18 +94,7 @@ $is_solar_planner = is_page('solar-planner');
                 </a>
 
 
-                <!-- Projects -->
-                <a
-                    href="<?php echo esc_url(home_url('/projects/')); ?>"
-                    class="<?php echo esc_attr(
-                        $is_projects_page
-                            ? 'relative text-sm font-bold text-slate-950 after:absolute after:-bottom-2 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-solar-400'
-                            : 'relative text-sm font-semibold text-slate-600 transition hover:text-slate-950'
-                    ); ?>"
-                >
-                    Projects
-                </a>
-
+                <!-- Projects is intentionally hidden from navigation until project content is ready. -->
 
                 <!-- Solar Planner -->
                 <a
@@ -116,6 +106,19 @@ $is_solar_planner = is_page('solar-planner');
                     ); ?>"
                 >
                     Solar Planner
+                </a>
+
+
+                <!-- Insights -->
+                <a
+                    href="<?php echo esc_url(home_url('/insights/')); ?>"
+                    class="<?php echo esc_attr(
+                        $is_insights_page
+                            ? 'relative text-sm font-bold text-slate-950 after:absolute after:-bottom-2 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-solar-400'
+                            : 'relative text-sm font-semibold text-slate-600 transition hover:text-slate-950'
+                    ); ?>"
+                >
+                    Insights
                 </a>
 
 
@@ -247,18 +250,7 @@ $is_solar_planner = is_page('solar-planner');
                 </a>
 
 
-                <!-- Projects -->
-                <a
-                    href="<?php echo esc_url(home_url('/projects/')); ?>"
-                    class="<?php echo esc_attr(
-                        $is_projects_page
-                            ? 'mobile-link block rounded-xl bg-solar-50 px-4 py-3 text-sm font-bold text-solar-800'
-                            : 'mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50'
-                    ); ?>"
-                >
-                    Projects
-                </a>
-
+                <!-- Projects is intentionally hidden from navigation until project content is ready. -->
 
                 <!-- Solar Planner -->
                 <a
@@ -270,6 +262,19 @@ $is_solar_planner = is_page('solar-planner');
                     ); ?>"
                 >
                     Solar Planner
+                </a>
+
+
+                <!-- Insights -->
+                <a
+                    href="<?php echo esc_url(home_url('/insights/')); ?>"
+                    class="<?php echo esc_attr(
+                        $is_insights_page
+                            ? 'mobile-link block rounded-xl bg-solar-50 px-4 py-3 text-sm font-bold text-solar-800'
+                            : 'mobile-link block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50'
+                    ); ?>"
+                >
+                    Insights
                 </a>
 
 
