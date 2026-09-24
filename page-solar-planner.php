@@ -379,7 +379,7 @@ get_header();
       </div>
     </section>
 
-    <div class="px-6 pt-20 lg:px-8 lg:pt-28">
+    <div class="mx-auto max-w-7xl px-6 pt-20 lg:px-8 lg:pt-28">
         <?php get_template_part('template-parts/contact-section'); ?>
     </div>
 </main>

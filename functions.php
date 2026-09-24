@@ -378,22 +378,33 @@ function solare_register_testimonial_post_type()
 
 add_action('init', 'solare_register_testimonial_post_type');
 
+
 /**
  * Validate contact information for the
  * SOL.ARE Lead & Site Assessment Form.
  *
- * Form ID: 1036
- * Email:    Field #2
- * Phone:    Field #4
+ * Email: Field #2
+ * Phone: Field #4
  *
  * Rules:
  * - At least Email OR Phone Number is required.
  * - Email format is handled by the WPForms Email field.
  * - Philippine mobile numbers must be valid when provided.
+ *
+ * This intentionally does not depend on the WPForms form ID,
+ * because IDs differ between local, staging, and production.
  */
 function solare_validate_lead_contact($fields, $entry, $form_data)
 {
-    if ((int) $form_data['id'] !== 1036) {
+    /*
+     * Only apply this validation to our SOL.ARE lead form.
+     * Using the form title keeps this portable across environments.
+     */
+    $form_title = isset($form_data['settings']['form_title'])
+        ? trim($form_data['settings']['form_title'])
+        : '';
+
+    if ($form_title !== 'SOL.ARE Lead & Site Assessment Form') {
         return;
     }
 
@@ -409,10 +420,10 @@ function solare_validate_lead_contact($fields, $entry, $form_data)
      * Require at least one contact method.
      */
     if ($email === '' && $phone === '') {
-        wpforms()->process->errors[1036][2] =
+        wpforms()->process->errors[$form_data['id']][2] =
             'Please provide either your email address or phone number.';
 
-        wpforms()->process->errors[1036][4] =
+        wpforms()->process->errors[$form_data['id']][4] =
             'Please provide either your email address or phone number.';
 
         return;
@@ -426,10 +437,9 @@ function solare_validate_lead_contact($fields, $entry, $form_data)
      * +639171234567
      * 639171234567
      *
-     * Spaces and hyphens are allowed.
+     * Spaces, hyphens, and parentheses are allowed.
      */
     if ($phone !== '') {
-
         $normalized_phone = preg_replace(
             '/[\s\-()]/',
             '',
@@ -442,7 +452,7 @@ function solare_validate_lead_contact($fields, $entry, $form_data)
         );
 
         if (!$valid_phone) {
-            wpforms()->process->errors[1036][4] =
+            wpforms()->process->errors[$form_data['id']][4] =
                 'Please enter a valid Philippine mobile number, e.g. 09171234567.';
         }
     }

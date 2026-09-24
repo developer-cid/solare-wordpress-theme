@@ -418,7 +418,7 @@ body {
    SOL.ARE Lead Form - Compact Layout
    ========================================================= */
 
-#wpforms-form-1036 .wpforms-field-container {
+.solare-lead-form .wpforms-form .wpforms-field-container {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 20px;
@@ -426,42 +426,46 @@ body {
 }
 
 /* Name */
-#wpforms-1036-field_1-container {
+#wpforms-field_1-container {
     grid-column: 1 / -1;
 }
 
 /* Email */
-#wpforms-1036-field_2-container {
+#wpforms-field_2-container {
     grid-column: 1;
 }
 
 /* Phone */
-#wpforms-1036-field_4-container {
+#wpforms-field_4-container {
     grid-column: 2;
 }
 
 /* Property Location */
-#wpforms-1036-field_5-container {
+#wpforms-field_5-container {
     grid-column: 1 / -1;
 }
 
 /* Property Type */
-#wpforms-1036-field_6-container {
+#wpforms-field_6-container {
     grid-column: 1;
 }
 
 /* Monthly Electricity Bill */
-#wpforms-1036-field_7-container {
+#wpforms-field_7-container {
     grid-column: 2;
 }
 
-/* Message */
-#wpforms-1036-field_8-container {
-    grid-column: 1 / -1;
+/* Message - full width */
+.solare-lead-form .wpforms-form
+.wpforms-field-container
+> .wpforms-field[data-field-id="8"] {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
 }
 
 /* Override WPForms layout widths */
-#wpforms-form-1036 .wpforms-field-container > .wpforms-field {
+.solare-lead-form .wpforms-form .wpforms-field-container > .wpforms-field {
     width: 100% !important;
     float: none !important;
     clear: none !important;
@@ -471,11 +475,11 @@ body {
 
 /* Mobile */
 @media (max-width: 768px) {
-    #wpforms-form-1036 .wpforms-field-container {
+    .solare-lead-form .wpforms-form .wpforms-field-container {
         display: block !important;
     }
 
-    #wpforms-form-1036 .wpforms-field {
+    .solare-lead-form .wpforms-form .wpforms-field {
         width: 100% !important;
     }
 }
@@ -484,29 +488,29 @@ body {
    SOL.ARE Lead Form - Field Styling
    ========================================================= */
 
-#wpforms-form-1036 .wpforms-field {
+.solare-lead-form .wpforms-form .wpforms-field {
     padding-top: 8px !important;
     padding-bottom: 8px !important;
 }
 
-#wpforms-form-1036 .wpforms-field-label {
+.solare-lead-form .wpforms-form .wpforms-field-label {
     margin-bottom: 7px !important;
     color: #ffffff !important;
     font-size: 14px !important;
     font-weight: 600 !important;
 }
 
-#wpforms-form-1036 .wpforms-field-sublabel {
+.solare-lead-form .wpforms-form .wpforms-field-sublabel {
     margin-top: 5px !important;
     color: #94a3b8 !important;
     font-size: 12px !important;
 }
 
-#wpforms-form-1036 input[type="text"],
-#wpforms-form-1036 input[type="email"],
-#wpforms-form-1036 input[type="number"],
-#wpforms-form-1036 select,
-#wpforms-form-1036 textarea {
+.solare-lead-form .wpforms-form input[type="text"],
+.solare-lead-form .wpforms-form input[type="email"],
+.solare-lead-form .wpforms-form input[type="number"],
+.solare-lead-form .wpforms-form select,
+.solare-lead-form .wpforms-form textarea {
     min-height: 44px !important;
     padding: 10px 12px !important;
 
@@ -523,14 +527,14 @@ body {
         box-shadow 0.2s ease;
 }
 
-#wpforms-form-1036 textarea {
+.solare-lead-form .wpforms-form textarea {
     min-height: 110px !important;
     resize: vertical;
 }
 
-#wpforms-form-1036 input:focus,
-#wpforms-form-1036 select:focus,
-#wpforms-form-1036 textarea:focus {
+.solare-lead-form .wpforms-form input:focus,
+.solare-lead-form .wpforms-form select:focus,
+.solare-lead-form .wpforms-form textarea:focus {
     outline: none !important;
     border-color: #fbbf24 !important;
     box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.15) !important;
@@ -540,12 +544,12 @@ body {
    SOL.ARE Lead Form - Submit Button
    ========================================================= */
 
-#wpforms-form-1036 .wpforms-submit-container {
+.solare-lead-form .wpforms-form .wpforms-submit-container {
     margin-top: 12px !important;
     padding-top: 0 !important;
 }
 
-#wpforms-form-1036 button[type="submit"] {
+.solare-lead-form .wpforms-form button[type="submit"] {
     width: 100% !important;
     min-height: 52px !important;
 
@@ -567,13 +571,13 @@ body {
         box-shadow 0.2s ease !important;
 }
 
-#wpforms-form-1036 button[type="submit"]:hover {
+.solare-lead-form .wpforms-form button[type="submit"]:hover {
     background: #f59e0b !important;
     transform: translateY(-1px);
     box-shadow: 0 8px 20px rgba(245, 158, 11, 0.18) !important;
 }
 
-#wpforms-form-1036 button[type="submit"]:focus {
+.solare-lead-form .wpforms-form button[type="submit"]:focus {
     outline: 3px solid rgba(251, 191, 36, 0.25) !important;
     outline-offset: 3px;
 }
@@ -582,14 +586,14 @@ body {
    SOL.ARE Lead Form - Name Field Alignment
    ========================================================= */
 
-#wpforms-form-1036 #wpforms-1036-field_1-container .wpforms-field-row {
+.solare-lead-form .wpforms-form #wpforms-field_1-container .wpforms-field-row {
     display: flex !important;
     width: 100% !important;
     max-width: 100% !important;
     gap: 20px !important;
 }
 
-#wpforms-form-1036 #wpforms-1036-field_1-container .wpforms-field-row-block {
+.solare-lead-form .wpforms-form #wpforms-field_1-container .wpforms-field-row-block {
     flex: 1 1 0 !important;
     width: 50% !important;
     max-width: none !important;
@@ -598,19 +602,19 @@ body {
     float: none !important;
 }
 
-#wpforms-form-1036 #wpforms-1036-field_1-container input {
+.solare-lead-form .wpforms-form #wpforms-field_1-container input {
     width: 100% !important;
     max-width: 100% !important;
 }
 
 /* Mobile */
 @media (max-width: 768px) {
-    #wpforms-form-1036 #wpforms-1036-field_1-container .wpforms-field-row {
+    .solare-lead-form .wpforms-form #wpforms-field_1-container .wpforms-field-row {
         flex-direction: column !important;
         gap: 10px !important;
     }
 
-    #wpforms-form-1036 #wpforms-1036-field_1-container .wpforms-field-row-block {
+    .solare-lead-form .wpforms-form #wpforms-field_1-container .wpforms-field-row-block {
         width: 100% !important;
     }
 }

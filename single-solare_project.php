@@ -156,7 +156,7 @@ while (have_posts()) :
         </div>
     </section>
 
-    <div class="px-6 pt-20 pb-16 lg:px-8 lg:pt-28 lg:pb-24">
+    <div class="mx-auto max-w-6xl px-6 pt-20 pb-16 lg:px-8 lg:pt-28 lg:pb-24">
         <?php get_template_part('template-parts/contact-section'); ?>
     </div>
 
