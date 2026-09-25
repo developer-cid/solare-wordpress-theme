@@ -1,11 +1,16 @@
 <?php
 /**
+ * Template Name: Insights
  * Insights listing page.
  *
  * @package Solare
  */
 
 get_header();
+
+$insights_page_id = get_queried_object_id();
+$insights_title = $insights_page_id ? get_the_title($insights_page_id) : 'Insights';
+$insights_intro = $insights_page_id ? get_post_field('post_content', $insights_page_id) : '';
 
 $paged = max(1, get_query_var('paged'), get_query_var('page'));
 
@@ -28,11 +33,13 @@ $insights_query = new WP_Query([
                     Insights
                 </p>
                 <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">
-                    Solar insights for smarter energy decisions.
+                    <?php echo esc_html($insights_title); ?>
                 </h1>
-                <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-                    Practical guides and insights about solar energy, electricity costs, system planning, and renewable energy in the Philippines.
-                </p>
+                <?php if (trim(wp_strip_all_tags($insights_intro))) : ?>
+                    <div class="solare-article-content mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+                        <?php echo apply_filters('the_content', $insights_intro); ?>
+                    </div>
+                <?php endif; ?>
             </header>
 
             <?php if ($insights_query->have_posts()) : ?>
